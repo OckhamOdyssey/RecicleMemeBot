@@ -1,16 +1,14 @@
 const express = require('express');
-const app = express()
+require('dotenv').config();
+const app = express();
 const PORT = process.env.PORT || 3000;
-const { get } = require('./random-stuff')
+const { RandomStuff } = require('./random-stuff')
 
 app.use(express.urlencoded({
     extended:false
 }));
 
 app.use(express.json())
-app.get('/', function (req, res) {
-    console.log(get)
-    res.send('Hello World')
-});
+RandomStuff.instance().getJoke()
 
 app.listen(PORT,()=>{console.log(`Listening on localhost:${PORT}`)})
